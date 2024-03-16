@@ -80,19 +80,19 @@ namespace NetCoreIdentity.Controllers
                 }); 
             }
 
-            AssignRolePgeVM arPv = new()
+            AssignRolePgeVM arPvm = new()
             {
                 UserID = id,
                 Roles = roles
             };
 
-            return View(arPv);
+            return View(arPvm);
         }
-
+        [HttpPost]
         public async Task<IActionResult> AssignRole(AssignRolePgeVM model)
         {
             AppUser appUser = await _userManager.Users.SingleOrDefaultAsync(x => x.Id == model.UserID);
-            
+
             IList<string> userRoles = await _userManager.GetRolesAsync(appUser);
 
             foreach (AppRoleResponseModel role in model.Roles)
