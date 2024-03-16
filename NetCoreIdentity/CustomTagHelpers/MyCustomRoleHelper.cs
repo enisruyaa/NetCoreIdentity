@@ -23,12 +23,14 @@ namespace NetCoreIdentity.CustomTagHelpers
         {
             string html = "";
             IList<string> userRoles = await _userManager.GetRolesAsync(await _userManager.Users.FirstOrDefaultAsync(x => x.Id == UserID)); // Bu kısımda FirstOrDefultAsync kullanmmız önemli çünkü await kullanıyoruz direkt olarak FirstOrDefult dersek kullanamayız.
+
             foreach (string role in userRoles)
             {
-                html += $"{role},"; // Hamburger otomasyonunda kullanıdğımız kodun ayınısıdır.
+                html += $"{role},"; // Hamburger otomasyonunda kullandığımız kodun aynısıdır
             }
 
             html = html.TrimEnd(',');
+
             output.Content.SetHtmlContent(html);
         }
     }
